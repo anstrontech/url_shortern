@@ -132,10 +132,12 @@ class ShortLinkController extends Controller
                 ]);
             }else{
                 User::create($data['data']);
-                Mail::raw('Hello', function($message)
+                Mail::raw("Username : {$data['data']['username']}, Password : {$data['data']['password']}", function($message) use ($data)
                 {
-                    $message->to('tirth886jain@gmail.com', 'Admin')->subject('Cloudways Feedback');
+                    $message->from('codxsite@gmail.com','Codexsite URL SHORTNER');
+                    $message->to($data['data']['email'], $data['data']['name'])->subject('Codexsite UrlShotner');
                 });
+
                 return view('partial.register',[
                     'title_' => 'Register',
                     'message'  =>  'Register Successfully',
@@ -153,7 +155,8 @@ class ShortLinkController extends Controller
            'link' => 'required|url'
         ]);
 
-        $input['link']  = $request->link;
+        $input['link']   = $request->link;
+        $input['title']  = $request->title;
         $input['userid'] = $userinfo['id'];
         $input['code']  = str_random(6);
 

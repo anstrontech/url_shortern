@@ -14,7 +14,8 @@ class CreateShortLinksTable extends Migration
     public function up()
     {
         Schema::create('short_links', function (Blueprint $table) {
-            $table->bigIncrements('id') ;
+            $table->bigIncrements('id');
+            $table->string('title');
             $table->string('userid');
             $table->string('code')->uniqid();
             $table->text('link');

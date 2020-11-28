@@ -112,3 +112,14 @@ button:focus,
     height: 200px;
     resize: none;
 }
+
+.buttons-csv,
+.page-link {
+    background: var(--primary) !important;
+    padding: 0.5rem;
+    color: #fff;
+}
+
+.buttons-csv:hover {
+    text-decoration: none !important;
+}

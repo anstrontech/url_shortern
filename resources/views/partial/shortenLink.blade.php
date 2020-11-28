@@ -8,6 +8,9 @@
         <form method="POST" action="{{ route('generate.shorten.link.post') }}">
             @csrf
             <div class="input-group mb-3">
+                <input type="text" name="title" class="form-control" placeholder="Enter Title" >
+            </div>
+            <div class="input-group mb-3">
               <input type="text" name="link" class="form-control" placeholder="Enter URL" aria-label="Recipient's username" aria-describedby="basic-addon2">
               <div class="flex items-center justify-between">
                 <button
@@ -25,10 +28,11 @@
                     <p>{{ Session::get('success') }}</p>
                 </div>
             @endif
-            <table class="table table-bordered table-sm">
+            <table class="table table-bordered table-sm" id="datatable">
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>TITLE</th>
                         <th>Short Link</th>
                         <th>Link</th>
                         <th>Action</th>
@@ -38,6 +42,7 @@
                     @foreach($shortLinks as $key => $row)
                         <tr>
                             <td>{{ ++$key }}</td>
+                            <td>{{ $row->title }}</td>
                             <td><a href="{{ route('shorten.link', $row->code) }}" target="_blank">{{ route('shorten.link', $row->code) }}</a></td>
                             <td class="text-break">{{ $row->link }}</td>
                         <td><a href="?urlcode={{ $row->code }}" class="btn btn-danger btn-sm">Delete</a></td>
